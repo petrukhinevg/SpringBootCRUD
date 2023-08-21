@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:if="${user != null}">Редактировать</title>
+    <title th:if="${user == null}">Добавить</title>
+</head>
+<body>
+<form th:action="${user != null ? '/edit' : '/add'}" method="POST">
+    <input type="hidden" th:if="${user != null}" name="id" th:value="${user.id}">
+    <label for="name">Имя</label>
+    <input type="text" placeholder="введите имя" name="name" id="name" th:value="${user != null ? user.name : ''}">
+    <label for="age">Возраст</label>
+    <input type="text" placeholder="введите возраст" name="age" id="age" th:value="${user != null ? user.age : ''}">
+    <label for="country">Страна</label>
+    <input type="text" placeholder="введите страну" name="country" id="country" th:value="${user != null ? user.country : ''}">
+    <input type="hidden" th:if="${user != null}" name="_method" value="patch">
+    <input type="submit" th:value="${user != null ? 'Редактировать юзера' : 'Добавить юзера'}">
+</form>
+</body>
+</html>
